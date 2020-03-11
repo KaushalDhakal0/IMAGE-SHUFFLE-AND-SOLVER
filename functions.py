@@ -35,10 +35,7 @@ def AIshift():
     index.remove(initBlank)
     initBlankCol = int(initBlank % 3)
     initBlankRow = int(initBlank / 3)
-    # print("Initial blank "+str(initBlank))
     while index:
-        # event = pygame.event.wait()
-        # if event.type == pygame.MOUSEBUTTONDOWN:
         nextBlank = index[0]
         index.remove(nextBlank)
         # print("next position blank"+str(nextBlank))
@@ -48,25 +45,14 @@ def AIshift():
         newshift(nextBlankrow, nextBlankcol, initBlankRow, initBlankCol)
         initBlankCol = nextBlankcol
         initBlankRow = nextBlankrow
-    # pygame.time.delay(1000)
-
-
-# shuffle the puzzle by making some random shift moves
 def shuffle():
     global emptyc, emptyr
-    # keep track of last shuffling direction to avoid "undo" shuffle moves
     last_r = 0
-    # shift(emptyc - 1, emptyr)
-    # shift(emptyc - 1, emptyr)
-    for i in range(75):
-        # slow down shuffling for visual effect
+    for i in range(75)
         pygame.time.delay(50)
         while True:
-            # pick a random direction and make a shuffling move
-            # if that is possible in that direction
             r = random.randint(1, 4)
             if (last_r + r == 5):
-                # don't undo the last shuffling move
                 continue
             if r == 1 and (emptyc > 0):
                 shift(emptyc - 1, emptyr)  # shift left
@@ -77,10 +63,9 @@ def shuffle():
             elif r == 3 and (emptyr < ROWS - 1):
                 shift(emptyc, emptyr + 1)  # shift down
             else:
-                # the random shuffle move didn't fit in that direction
                 continue
             last_r = r
-            break  # a shuffling move was made
+            break 
     pygame.time.delay(1000)
 
 
@@ -88,13 +73,10 @@ def convertToArray():
     global state
     array = []
     for c in range(COLUMNS):
-        for r in range(ROWS):
-            # print("goalState = "+str(state[c,r][0])+str(state[c,r][1]))
-
+        for r in range(ROWS)
             value = state[(c, r)][0] * 3 + state[(c, r)][1] + 1
             array.append(value)
     return array
-
 
 def mHueristics(state):
     counter = 0
@@ -106,7 +88,6 @@ def mHueristics(state):
             expRow = int((value - 1) / 3)
             expCol = int((value - 1) % 3)
             diff = abs(row - expRow) + abs(col - expCol)
-            # print(diff)
             counter += diff
     return counter
 
@@ -138,7 +119,6 @@ def determineChild(frontierTuple):
     print("Actions List " + str(actions))
     while actions:
         nrow, ncol = row, col
-        # print("Inside Actions Loop")
         npath = path[:]
         nstate = currentState[:]
         action = actions.pop()
